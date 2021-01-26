@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : upload
     Created on : 05.02.2018, 21:40:42
     Author     : Андрей
@@ -15,27 +15,45 @@
         <title>Анализ по городам</title>
     </head>
     <body>
-        <form method="POST" enctype="multipart/form-data"
-            action="/Reports/maintenance">
-            Загрузи файлик:  <input type="file" name="file"><br /> 
-            <input type="submit" value="Upload"> 
-        </form> 
+        <form method="POST"
+            action="/Reports/maintenanceSigmaAD">
+            <input name="from" type="date" value="18-01-2021">
+            <input name="to" type="date" value="24-01-2021">
+            <input type="submit" value="Upload">
+        </form>
+<%--        <form:form method="POST"--%>
+<%--                   action="/Reports/maintenanceSigmaAD" modelAttribute="dateRange">--%>
+<%--            <table>--%>
+<%--                <tr>--%>
+<%--                    <td><form:label path="from">Первый день отчета</form:label></td>--%>
+<%--                    <td><form:input type="date" path="from"/></td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                    <td><form:label path="to">Id</form:label></td>--%>
+<%--                    <td><form:input type="date" path="to"/></td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                    <td><input type="submit" value="Submit"/></td>--%>
+<%--                </tr>--%>
+<%--            </table>--%>
+<%--        </form:form>--%>
         Сообщение от сервера: ${message}
+
 <table width="1450" style="border-collapse:collapse;">
     <tbody>
     <tr height="8">
-        <td width="1446" colspan="24" bgcolor="#bcd2ee" >
+        <td width="1446" colspan="25" bgcolor="#bcd2ee" >
         <div align="center"><font size="1" color="blue">Отчет за период
         ${range}
         </font></div>
         </td>
     </tr>
     <tr height="8">
-    <td width="68" rowspan="3" class="header" >
-<div align="center"><font size="1">МР</font></div>
-</td><td width="71" rowspan="3" class="header" >
-<div align="center"><font size="1">Город</font></div>
-</td><td width="1304" colspan="22" class="header" >
+    <td width="108" rowspan="3" class="header" >
+    <div align="center"><font size="1">МР</font></div>
+    </td><td width="71" rowspan="3" class="header" >
+    <div align="center"><font size="1">Город</font></div>
+    </td><td width="1304" colspan="23" class="header" >
     <div align="center"><font size="1">Обслуживание и качество.
     Отчетный период 00:00 пн - 23:59 вс. В отчет попадают
     заявки: 1. X=Все закрытые за отчетный период
@@ -58,7 +76,7 @@
     в срок или длящихся на 23:59 вс отчетной недели</font></div>
     </td><td width="81" rowspan="2" class="header" >
     <div align="center"><font size="1">Среднее время решения
-    заявки на техническую поддержку, мин</font></div>
+    заявки на техническую поддержку, час</font></div>
     </td><td width="79" rowspan="2" class="header" >
     <div align="center"><font size="1">Количество повторных
     заявок на техническую поддержку</font></div>
@@ -73,7 +91,7 @@
     </td><td width="83" rowspan="2" class="header" >
     <div align="center"><font size="1">Среднее время решения
     или обработки заявки абонента 2-ой линией
-    тех. поддержки на выборке N=X+Y, мин</font></div>
+    тех. поддержки на выборке N=X+Y, час</font></div>
     </td><td width="98" rowspan="2" class="header" >
     <div align="center"><font size="1">Количество повторных
     заявок из N=X+Y на тех. поддержку, в которых
@@ -96,6 +114,11 @@
     заявок из N на тех. поддержку, в которых
     предыдущее обращение было закрыто на 3-ей
     линии тех. поддержки</font></div>
+    </td>
+    </td><td width="97" rowspan="2" class="header" >
+    <div align="center"><font size="1">Среднее время
+    "Решение о переводе на 2ЛТП" час.
+    </font></div>
     </td>
     </tr>
     <tr height="8">
@@ -146,11 +169,11 @@
         </td><td width="38" >
         <div align="center"><font size="1">${cityModel.getCompleateAtMore72h()}</font></div>
         </td><td width="81" >
-        <div align="center"><font size="1"><fmt:formatNumber value="${cityModel.getAveregeTimeL23TP()*60}" pattern="###.##"/></font></div>
+        <div align="center"><font size="1"><fmt:formatNumber value="${cityModel.getAveregeTimeL23TP()}" pattern="###.##"/></font></div>
         </td><td width="79" >
-        <div align="center"><font size="1">${cityModel.getRepeatedTTL2()}</font></div>
+        <div align="center"><font size="1"><fmt:formatNumber value="${cityModel.getRepeatedTTL2()/8 + cityModel.getRepeatedTTL3()}" pattern="###"/></font></div>
         </td><td width="86" >
-        <div align="center"><font size="1">${cityModel.getCountL2TP() - cityModel.getCountL3TP()}</font></div>
+        <div align="center"><font size="1">${(cityModel.getCountL2TP() + cityModel.getAtWorkCount()) - cityModel.getCountL3TP()}</font></div>
         </td><td width="21" >
         <div align="center"><font size="1">${cityModel.getCompleateAt6hL2()}</font></div>
         </td><td width="34" >
@@ -160,9 +183,9 @@
         </td><td width="40" >
         <div align="center"><font size="1">${cityModel.getCompleateAtMore24hL2()}</font></div>
         </td><td width="83" >
-        <div align="center"><font size="1"><fmt:formatNumber value="${cityModel.getAveregeTimeL2TP()*60}" pattern="###.##"/></font></div>
+        <div align="center"><font size="1"><fmt:formatNumber value="${cityModel.getAveregeTimeL2TP()}" pattern="###.##"/></font></div>
         </td><td width="98" >
-        <div align="center"><font size="1">${cityModel.getRepeatedTTL2()}</font></div>
+        <div align="center"><font size="1"><fmt:formatNumber value="${cityModel.getRepeatedTTL2()/8}" pattern="###"/></font></div>
         </td><td width="87" >
         <div align="center"><font size="1">${cityModel.getCountL3TP()}</font></div>
         </td><td width="24" >
@@ -178,10 +201,52 @@
         </td><td width="97" >
         <div align="center"><font size="1">${cityModel.getRepeatedTTL3()}</font></div>
         </td>
+        </td><td width="97" >
+        <div align="center"><font size="1"><fmt:formatNumber value="${cityModel.getDecisionTime()}" pattern="###.##"/></font></div>
+        </td>
     </tr>
     
         </c:forEach>
-<%-- Конец строки таблицы --%>
+    <%-- Конец строки таблицы --%>
 </tbody></table>
     </body>
+    
+    <div style="position: relative; float: left; padding: 10px">
+        Были на ремонте в магнитогорске более 24х часов
+        <ol>
+            <c:forEach var="row" items="${timeMoreThen24h}">
+            <li >
+                ${row}
+            </li>
+            </c:forEach>
+        </ol>
+    </div>
+    <div style="position: relative; float: left; padding: 10px">
+        Повторные обращения на 3ЛТП Магнитогорск
+        <ol>
+            <c:forEach var="row" items="${repOn3LTPMGN}">
+            <li >
+                ${row}
+            </li>
+            </c:forEach>
+        </ol>
+    </div>
+    <div style="position: relative; float: left; padding: 10px">
+        Повторные обращения на 3ЛТП без Магнитогорска
+        <ol>
+            <c:forEach var="row" items="${repOn3LTP}">
+            <li >
+                ${row}
+            </li>
+            </c:forEach>
+        </ol>
+    </div>
+    <div style="position: relative; float: left; padding: 10px">
+        Среднее время за период:
+        <ol>
+            <li>2ЛТП: <fmt:formatNumber value="${avgTime2LTP}" pattern="###.##"/></li>
+            <li>3ЛТП: <fmt:formatNumber value="${avgTime3LTP}" pattern="###.##"/></li>
+        </ol>
+    </div>
+
 </html>
