@@ -17,9 +17,9 @@
       <servlet-name>Reports</servlet-name>
       <url-pattern>/</url-pattern>
    </servlet-mapping>
-    
+
     <welcome-file-list>
-        <welcome-file>maintenanceSigma</welcome-file>
+        <welcome-file>maintenanceSigmaAD</welcome-file>
     </welcome-file-list>
 
     <filter>
