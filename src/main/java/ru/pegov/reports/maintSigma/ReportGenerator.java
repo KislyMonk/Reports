@@ -91,7 +91,7 @@ public class ReportGenerator {
             
             //create models
             StreamSupport.stream(sheet.spliterator(), false)
-                    .filter(r -> !r.getCell(cd.DESCRIPTION).getStringCellValue().contains("#отключения")) //Колесо попросил отсеить это говно, на самом деле не помогло
+                    .filter(r -> !r.getCell(cd.COMMENT).getStringCellValue().contains("#отключения")) //Колесо попросил отсеить это говно, на самом деле не помогло
                     .forEach(r ->{
                         this.parseRow(r);
                     });
