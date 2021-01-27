@@ -95,7 +95,7 @@ public class ReportGenerator {
         em.incCountTT();
         
         //increment repeated TT count
-        if(repeatedTT.equalsIgnoreCase("2ЛТП")){
+        if(repeatedTT.contains("2ЛТП")){
             em.incRepeatedTT();
         }
         

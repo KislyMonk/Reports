@@ -124,7 +124,7 @@
                 <td>
                     <div align="center">
                         <font size="1">
-                            <fmt:formatNumber value="${(model.getRepeatedTT()/model.getCountTT())*100}" pattern="###.##"/>
+                            <fmt:formatNumber value="${(model.getRepeatedTT()/(model.getCountTT()))*100}" pattern="###.##"/>%
                         </font>
                     </div>
                 </td>
@@ -138,7 +138,7 @@
                 <td>
                     <div align="center">
                         <font size="1">
-                            <fmt:formatNumber value="${(model.getCountL3TT()/model.getCountTT())*100}" pattern="###.##"/>
+                            <fmt:formatNumber value="${(model.getCountL3TT()/(model.getCountTT()))*100}" pattern="###.##"/>%
                         </font>
                     </div>
                 </td>
