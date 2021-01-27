@@ -15,11 +15,12 @@
         <title>Анализ по сотрудникам</title>
     </head>
     <body>
-        <form method="POST" enctype="multipart/form-data"
-            action="/Reports/employee">
-            Загрузи файлик:  <input type="file" name="file"><br /> 
-            <input type="submit" value="Upload"> 
-        </form> 
+    <form method="POST"
+          action="/Reports/employee">
+        <input name="from" type="date" >
+        <input name="to" type="date" >
+        <input type="submit" value="Upload">
+    </form>
         Сообщение от сервера: ${message}
         
     <table width="694" style="border-collapse:collapse;">

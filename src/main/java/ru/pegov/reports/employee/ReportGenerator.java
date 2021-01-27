@@ -75,8 +75,8 @@ public class ReportGenerator {
     private void parseRow(Row row){
         String name = row.getCell(cd.EMPLOYEE).getStringCellValue();
         String repeatedTT = row.getCell(cd.LAST_TT_FROM).getStringCellValue();
-        String reason = row.getCell(cd.REASON).getStringCellValue();
-        String l3tt = row.getCell(cd.ON_3LTP_TIME).getStringCellValue();
+        //String reason = row.getCell(cd.REASON).getStringCellValue();
+        Double l3tt = getL3TPTime(row);
         
         EmployeeModel  em;
         
@@ -104,6 +104,18 @@ public class ReportGenerator {
             em.incCountL3TT();
         }
         
-        em.setComplexityString(reason);
+       // em.setComplexityString(reason);
+    }
+
+    private Double getL3TPTime(Row row){
+        try{
+            return row.getCell(cd.ON_3LTP_TIME).getNumericCellValue();
+        }catch(IllegalStateException e){
+            try{
+                return Double.parseDouble(row.getCell(cd.ON_3LTP_TIME).getStringCellValue());
+            }catch(NumberFormatException ex){
+                return null;
+            }
+        }
     }
 }

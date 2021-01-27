@@ -22,7 +22,7 @@ public class ColumnDeterminant {
     private final String OpeningDateName = "Дата открытия";
     private final String EndingDateName = "Дата закрытия";
     private final String StatusName = "Статус";
-    private final String EmployeeName = " Последний ответственный";
+    private final String EmployeeName = "Последний ответственный";
     private final String Start3LTPDateName = "Посл. перевод на 3ЛТП";
     private final String End3LTPDateName = "Посл. перевод с 3ЛТП";
     private final String On2LTPTimeName = "Общ. время ТТ в ЗО 2 ЛТП";

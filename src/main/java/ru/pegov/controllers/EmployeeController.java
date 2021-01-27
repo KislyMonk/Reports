@@ -1,16 +1,21 @@
 package ru.pegov.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.EmptyFileException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import ru.pegov.models.ReportTT_Request;
 import ru.pegov.reports.employee.ReportGenerator;
+import tools.TT_ReportDownloader;
 
 /**
  *
@@ -35,27 +40,19 @@ public class EmployeeController {
         } 
     }
     @PostMapping("/employee")
-    public ModelAndView submit(@RequestParam("file") MultipartFile file){
+    public ModelAndView submit(@ModelAttribute ReportTT_Request reportTT_request){
         ModelAndView mav = new ModelAndView("Employee");
         
         ReportGenerator rg = new ReportGenerator();
-        
-        try {
-            rg.setInputStream(file.getInputStream());
-        } catch (IOException ex) {
-            
-        } catch (EmptyFileException ex2) {
-            if(storedMAV == null){
-                mav.addObject("message", "Воу воу воу полегче, ты забыл файлик");
-                return mav;
-            }else{
-                storedMAV.addObject("message", "Воу воу воу полегче, ты забыл файлик, вот тебе предыдущий отчет");
-                return storedMAV;
-            } 
-        }
-        
-        
-        
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        String from = dateFormat.format(reportTT_request.getFrom());
+        String to = dateFormat.format(reportTT_request.getTo());
+
+        TT_ReportDownloader TTRD = new TT_ReportDownloader();
+
+        rg.setInputStream(new ByteArrayInputStream(TTRD.getReportUral(from,to)));
+
         mav.addObject("message", "Ниже смотри отчет или загрузи новый");
         mav.addObject("range", rg.getSamplingRange());
         mav.addObject("modelsList", rg.getModels());

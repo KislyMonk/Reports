@@ -17,26 +17,10 @@
     <body>
         <form method="POST"
             action="/Reports/maintenanceSigmaAD">
-            <input name="from" type="date" value="18-01-2021">
-            <input name="to" type="date" value="24-01-2021">
+            <input name="from" type="date" >
+            <input name="to" type="date" >
             <input type="submit" value="Upload">
         </form>
-<%--        <form:form method="POST"--%>
-<%--                   action="/Reports/maintenanceSigmaAD" modelAttribute="dateRange">--%>
-<%--            <table>--%>
-<%--                <tr>--%>
-<%--                    <td><form:label path="from">Первый день отчета</form:label></td>--%>
-<%--                    <td><form:input type="date" path="from"/></td>--%>
-<%--                </tr>--%>
-<%--                <tr>--%>
-<%--                    <td><form:label path="to">Id</form:label></td>--%>
-<%--                    <td><form:input type="date" path="to"/></td>--%>
-<%--                </tr>--%>
-<%--                <tr>--%>
-<%--                    <td><input type="submit" value="Submit"/></td>--%>
-<%--                </tr>--%>
-<%--            </table>--%>
-<%--        </form:form>--%>
         Сообщение от сервера: ${message}
 
 <table width="1450" style="border-collapse:collapse;">
