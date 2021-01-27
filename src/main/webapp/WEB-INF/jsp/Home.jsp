@@ -12,6 +12,7 @@
 </head>
 <body>
 Доступные отчеты:
+<p> <a href="/Reports/employee"> Отчет по сотрудникам</a>
 <p> <a href="/Reports/maintenanceSigma"> Отчет по ТТ </a>, но придется загручить отчет руками Excel-файл
 <p> <a href="/Reports/maintenanceSigmaAD"> Отчет по ТТ </a>, все загрузит сам
 </body>
