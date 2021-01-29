@@ -8,7 +8,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 public class TT_ReportDownloader {
-    private String url = "http://swr.transtk.ru/api/CrmOnyma/TT/TT";
+    private String url = "";
     private MultiValueMap<String, String> uriVariables = new LinkedMultiValueMap<String, String>();
     private String region = "Урал";
     private String dateStringFrom = "";
