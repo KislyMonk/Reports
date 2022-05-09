@@ -192,7 +192,7 @@
         </c:forEach>
     <%-- Конец строки таблицы --%>
 </tbody></table>
-    </body>
+
     
     <div style="position: relative; float: left; padding: 10px">
         Были на ремонте в магнитогорске более 24х часов
@@ -231,5 +231,5 @@
             <li>3ЛТП: <fmt:formatNumber value="${avgTime3LTP}" pattern="###.##"/></li>
         </ol>
     </div>
-
+    </body>
 </html>

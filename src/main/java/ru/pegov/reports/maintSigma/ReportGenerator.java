@@ -386,7 +386,7 @@ public class ReportGenerator {
             try{
                 return Double.parseDouble(row.getCell(cd.ON_3LTP_TIME).getStringCellValue());
             }catch(NumberFormatException ex){
-                return null;
+                return getTimeFromString(row.getCell(cd.ON_3LTP_TIME).getStringCellValue());
             }
         }
     }
@@ -400,32 +400,35 @@ public class ReportGenerator {
             return row.getCell(cd.ON_2LTP_TIME).getNumericCellValue()*24;
         }
         
+        return getTimeFromString(rawStr);
+    }
+
+    private Double getTimeFromString(String rawStr){
         String hourStr = "00";
         String minuteStr = "00";
         String secondStr = "00";
-        
+
         try{
             hourStr = rawStr.substring(0, 2);
             minuteStr = rawStr.substring(3, 5);
             secondStr = rawStr.substring(6);
         }catch(StringIndexOutOfBoundsException e){
-            
+
         }
-        
-        
+
+
         Double result = 0.0;
-        
+
         try {
             result = Double.parseDouble(hourStr) +
                     Double.parseDouble(minuteStr)/60 +
                     Double.parseDouble(secondStr)/3600;
         } catch (NumberFormatException ex) {
-            
+
         }
-        
+
         return result;
     }
-    
     private Double getL2TPTimeFromDate(Row row){
         Double result = 0d;
         
