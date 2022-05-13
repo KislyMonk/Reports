@@ -16,7 +16,7 @@ public class ColumnDeterminant {
     private final String IDname = "№ Заявки";
     private final String AddressName = "Адрес подкл";
     private final String ClientIDname = "Номер договор";
-    private final String CommentName = "Описание проблемы";
+    private final String CommentName = "Действия по решению (Все комментарии)";
     private final String MRname = "МР";
     private final String CityName = "Город";
     private final String ReasonName = "Процесс";

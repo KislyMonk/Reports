@@ -409,11 +409,12 @@ public class ReportGenerator {
         String secondStr = "00";
 
         try{
-            hourStr = rawStr.substring(0, 2);
-            minuteStr = rawStr.substring(3, 5);
-            secondStr = rawStr.substring(6);
-        }catch(StringIndexOutOfBoundsException e){
-
+            String[] partOfTime = rawStr.split(":");
+            hourStr = partOfTime[0];
+            minuteStr = partOfTime[1];
+            secondStr = partOfTime[2];
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.err.println(rawStr);
         }
 
 
