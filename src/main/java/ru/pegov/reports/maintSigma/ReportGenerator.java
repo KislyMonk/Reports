@@ -67,8 +67,13 @@ public class ReportGenerator {
             XSSFWorkbook sourceBook = new XSSFWorkbook(is);
             XSSFSheet sheet = sourceBook.getSheetAt(0);
             cd = new ColumnDeterminant(sheet.getRow(0));
+            //now two titles rows
             sheet.removeRow(sheet.getRow(0)); //delete title row
-            
+            sheet.removeRow(sheet.getRow(1)); //delete title row
+
+            Logger.getLogger(ReportGenerator.class.getName()).log(Level.WARNING, null, sheet.getRow(0).toString());
+            Logger.getLogger(ReportGenerator.class.getName()).log(Level.WARNING, null, sheet.getRow(1).toString());
+            Logger.getLogger(ReportGenerator.class.getName()).log(Level.WARNING, null, sheet.getRow(2).toString());
             //prepare to create models
             StreamSupport.stream(sheet.spliterator(), false)
                     .forEach((Row r) ->{
